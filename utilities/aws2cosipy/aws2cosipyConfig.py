@@ -4,7 +4,7 @@
 """
 
 #------------------------
-# Declare variable names 
+# Declare variable names
 #------------------------
 
 # Pressure
@@ -13,9 +13,6 @@ PRES_var = 'PRES'
 # Temperature
 T2_var = 'T2'
 in_K = True
-
-# Cloud cover fraction
-N_var = 'tcc'
 
 # Relative humidity
 RH2_var = 'RH2'
@@ -30,7 +27,7 @@ RRR_var = 'RRR'
 U2_var = 'U2'
 
 # Incoming longwave radiation
-LWin_var = 'LWinCor_Avg'
+LWin_var = 'Lwin'
 
 # Snowfall
 SNOWFALL_var = 'SNOWFALL'
@@ -41,7 +38,7 @@ N_var = 'N'
 #------------------------
 # Aggregation to hourly data
 #------------------------
-aggregate_hourly = True
+aggregate_hourly = False
 
 # Delimiter in csv file
 delimiter = ','
@@ -52,7 +49,7 @@ WRF = False
 #------------------------
 # Radiation module 
 #------------------------
-radiationModule = True 
+radiationModule = True
 
 # Time zone
 timezone_lon = 90.0
@@ -61,7 +58,7 @@ timezone_lon = 90.0
 zeni_thld = 85.0
 
 #------------------------
-# Point model 
+# Point model
 #------------------------
 point_model = False
 plon = 10.777899874814329
@@ -69,12 +66,12 @@ plat = 46.807983544912666
 hgt = 3300
 
 #------------------------
-# Interpolation arguments 
+# Interpolation arguments
 #------------------------
-stationName = 'Zhadang'
-stationAlt = 5665.0
+stationName = 'Khumbu'
+stationAlt = 5050.0
 
-lapse_T         = -0.006  # Temp K per  m
-lapse_RH        = 0.002  # RH % per  m (0 to 1)
+lapse_T         = -0.0056  # Temp K per  m
+lapse_RH        = -0.001  # RH % per  m (0 to 1)
 lapse_RRR       = 0.0000   # RRR % per m (0 to 1)
 lapse_SNOWFALL  = 0.0000   # Snowfall % per m (0 to 1)

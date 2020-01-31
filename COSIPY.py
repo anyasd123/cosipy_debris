@@ -32,6 +32,7 @@ import yaml
 
 from config import *
 from slurm_config import *
+from sge_config import *
 from cosipy.cpkernel.cosipy_core import * 
 from cosipy.cpkernel.io import *
 
@@ -43,6 +44,7 @@ from dask.distributed import progress, wait, as_completed
 import dask
 from tornado import gen
 from dask_jobqueue import SLURMCluster
+from dask_jobqueue import SGECluster
 
 import scipy
 
@@ -81,6 +83,18 @@ def main():
             cluster.scale(processes * nodes)   
             print(cluster.job_script())
             print("You are using SLURM!\n")
+            print(cluster)
+            run_cosipy(cluster, IO, DATA, RESULT, RESTART, futures)
+
+    elif sge_use:
+
+        with SGECluster(interface=interface, cores=cores, processes=processes,
+                        memory=memory, shebang=shebang, walltime=walltime,
+                        resource_spec=resource_spec, job_extra=sge_parameters,
+                        local_directory='logs/dask-worker-space') as cluster:
+            cluster.scale(cores=total_cores)   
+            print(cluster.job_script())
+            print("You are using SGE!\n")
             print(cluster)
             run_cosipy(cluster, IO, DATA, RESULT, RESTART, futures)
 
@@ -142,7 +156,7 @@ def main():
 
 def run_cosipy(cluster, IO, DATA, RESULT, RESTART, futures):
 
-    with Client(cluster,processes=False) as client:
+    with Client(cluster) as client:
         print('--------------------------------------------------------------')
         print('\t Starting clients and submit jobs ... \n')
         print('-------------------------------------------------------------- \n')
@@ -162,6 +176,9 @@ def run_cosipy(cluster, IO, DATA, RESULT, RESTART, futures):
             total_cores = processes*nodes
             points_per_core = total_grid_points // total_cores
             print(total_grid_points, total_cores, points_per_core)
+
+        if sge_use is True:
+            print('Total grid points: {0}'.format(total_grid_points))
 
         # Check if evaluation is selected:
         if stake_evaluation is True:

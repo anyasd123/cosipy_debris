@@ -6,9 +6,9 @@
 #-----------------------------------
 # SIMULATION PERIOD 
 #-----------------------------------
-# Zhadang
-time_start = '2009-01-01T06:00'
-time_end   = '2009-01-10T00:00'
+# Khumbu
+time_start = '2013-01-01T00:00'
+time_end   = '2018-12-31T23:00'
 
 # Hintereisferner
 #time_start = '2018-09-17T08:00'
@@ -20,10 +20,10 @@ time_end   = '2009-01-10T00:00'
 time_start_str=(time_start[0:10]).replace('-','')
 time_end_str=(time_end[0:10]).replace('-','')
 
-data_path = './data/'                       
+data_path = './data'                       
 # Zhadang example
-input_netcdf= 'Zhadang/Zhadang_ERA5_2009.nc'
-output_netcdf = 'Zhadang_ERA5_'+time_start_str+'-'+time_end_str+'.nc'
+input_netcdf= 'Khumbu_20132018.nc'
+output_netcdf = 'Khumbu'+time_start_str+'-'+time_end_str+'.nc'
 # Hintereisferner example
 #input_netcdf= 'HEF/HEF_input.nc'
 #output_netcdf = 'HEF_'+time_start_str+'-'+time_end_str+'.nc'
@@ -58,12 +58,13 @@ else:
 #-----------------------------------
 # COMPRESSION of output netCDF
 #-----------------------------------
-compression_level = 2                                       # Choose value between 1 and 9 (highest compression)
+compression_level = 1                                       # Choose value between 1 and 9 (highest compression)
                                                             # Recommendation: choose 1, 2 or 3 (higher not worthwhile, because of needed time for writing output)
 #-----------------------------------
 # PARALLELIZATION 
 #-----------------------------------
 slurm_use = False                                           # use SLURM
+sge_use = True                                              # use SGE
 workers = None                                              # number of workers, if local cluster is used
 local_port = 8786                                           # port for local cluster
 
